@@ -1,0 +1,59 @@
+
+// TIME INTELLIGENCE MEASURES
+
+YTD Sales = 
+TOTALYTD(
+    [Total Sales],
+    'Calendar Table'[Date]
+)
+
+MTD Sales = 
+TOTALMTD(
+    [Total Sales],
+    'Calendar Table'[Date]
+)
+
+PTYD Sales = 
+CALCULATE(
+    [Total Sales],
+    SAMEPERIODLASTYEAR('Calendar Table'[Date]),
+    'Calendar Table'[Date] <= TODAY()
+)
+
+YTD Cars Sold = 
+TOTALYTD(
+    [Total Cars Sold],
+    'Calendar Table'[Date]
+)
+
+MTD Cars Sold = 
+TOTALMTD(
+    [Total Cars Sold],
+    'Calendar Table'[Date]
+)
+
+PTYD Cars Sold = 
+CALCULATE(
+    [Total Cars Sold],
+    SAMEPERIODLASTYEAR('Calendar Table'[Date]),
+    'Calendar Table'[Date] <= TODAY()
+)
+
+YTD Average Price = 
+TOTALYTD(
+    [Average Price],
+    'Calendar Table'[Date]
+)
+
+MTD Average Price = 
+TOTALMTD(
+    [Average Price],
+    'Calendar Table'[Date]
+)
+
+PTYD Average Price = 
+CALCULATE(
+    [Average Price],
+    SAMEPERIODLASTYEAR('Calendar Table'[Date]),
+    'Calendar Table'[Date] <= TODAY()
+)

@@ -1,0 +1,56 @@
+
+// DYNAMIC INSIGHTS PAGE MEASURES
+
+
+Performance Highlights = 
+VAR CurrentSales = [YTD Sales]
+VAR SalesGrowth = [YOY Sales Growth]
+RETURN
+"📈 PERFORMANCE HIGHLIGHTS" & UNICHAR(10) & UNICHAR(10) &
+"• Total Sales: " & FORMAT(CurrentSales, "$#,##0.0M") & 
+" (" & IF(SalesGrowth > 0, "▲", "▼") & " " & FORMAT(SalesGrowth, "0%") & " vs last year)"
+
+Top Performers = 
+VAR TopCompany = 
+    TOPN(1, 
+        ALLSELECTED('car_data'[Company]), 
+        [YTD Sales], 
+        DESC
+    )
+VAR TopCompanyName = 
+    IF(COUNTROWS(TopCompany) > 0, 
+       CONCATENATEX(TopCompany, 'car_data'[Company], ", "), 
+       "N/A")
+RETURN
+"🏆 TOP PERFORMERS" & UNICHAR(10) & UNICHAR(10) &
+"• Leading Company: " & TopCompanyName & 
+" with " & FORMAT([YTD Sales], "$#,##0.0M")
+
+Areas of Concern = 
+VAR UnderperformingRegions = 
+    FILTER(
+        VALUES('car_data'[Dealer_Region]),
+        [YOY Sales Growth] < 0
+    )
+RETURN
+"⚠️ AREAS OF CONCERN" & UNICHAR(10) & UNICHAR(10) &
+IF(COUNTROWS(UnderperformingRegions) > 0,
+    "• " & COUNTROWS(UnderperformingRegions) & " region(s) showing negative growth",
+    "• All regions showing positive growth ✓"
+)
+
+Recommendations = 
+VAR SUVDemand = 
+    CALCULATE([YOY Sales Growth], 'car_data'[Body Style] = "SUV")
+RETURN
+"🎯 RECOMMENDATIONS" & UNICHAR(10) & UNICHAR(10) &
+IF(SUVDemand > 0.15,
+    "• Increase SUV inventory by 20% to meet growing demand",
+    "• Monitor SUV segment closely for emerging opportunities"
+)
+
+Executive Summary = 
+VAR SalesGrowth = [YOY Sales Growth]
+RETURN
+"📊 EXECUTIVE SUMMARY: " &
+"Sales " & IF(SalesGrowth > 0, "up", "down") & " " & FORMAT(ABS(SalesGrowth), "0%")

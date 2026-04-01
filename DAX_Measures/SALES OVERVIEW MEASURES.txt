@@ -1,0 +1,16 @@
+
+// SALES OVERVIEW MEASURES
+
+
+YOY Sales Growth = 
+VAR CurrentYTD = [YTD Sales]
+VAR PreviousYTD = [PTYD Sales]
+RETURN
+IF(
+    NOT ISBLANK(PreviousYTD) && PreviousYTD <> 0,
+    DIVIDE(CurrentYTD - PreviousYTD, PreviousYTD),
+    BLANK()
+)
+
+YTD Sales vs PTYD Difference = 
+[YTD Sales] - [PTYD Sales]

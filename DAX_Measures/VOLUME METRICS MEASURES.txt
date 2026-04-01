@@ -1,0 +1,15 @@
+
+// VOLUME METRICS MEASURES
+
+YOY Cars Sold Growth = 
+VAR CurrentSold = [YTD Cars Sold]
+VAR PreviousSold = [PTYD Cars Sold]
+RETURN
+IF(
+    NOT ISBLANK(PreviousSold) && PreviousSold <> 0,
+    DIVIDE(CurrentSold - PreviousSold, PreviousSold),
+    BLANK()
+)
+
+YTD Cars Sold vs PTYD Difference = 
+[YTD Cars Sold] - [PTYD Cars Sold]

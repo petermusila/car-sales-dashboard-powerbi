@@ -1,0 +1,8 @@
+
+// CORE BASE MEASURES
+
+Total Sales = SUM('car_data'[Price ($)])
+
+Total Cars Sold = COUNTROWS('car_data')
+
+Average Price = AVERAGE('car_data'[Price ($)])

@@ -1,0 +1,16 @@
+
+// PRICE ANALYSIS MEASURES
+
+
+YOY Average Price Growth = 
+VAR CurrentAvg = [YTD Average Price]
+VAR PreviousAvg = [PTYD Average Price]
+RETURN
+IF(
+    NOT ISBLANK(PreviousAvg) && PreviousAvg <> 0,
+    DIVIDE(CurrentAvg - PreviousAvg, PreviousAvg),
+    BLANK()
+)
+
+YTD Avg Price vs PTYD Difference = 
+[YTD Average Price] - [PTYD Average Price]
